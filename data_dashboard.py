@@ -20,15 +20,12 @@ df = data.DataReader(name='AAPL',data_source='yahoo',start=start,end=end)
 df["Status"] = [inc_dec(c,o) for c,o in zip(df.Close,df.Open)]
 df['Middle'] = (df.Close+df.Open)/2
 df["Height"] = abs(df.Close-df.Open)
-
+hour_12 = 12*60*60*1000
 
 #create a new figure for plotting
-p = figure(x_axis_type = 'datetime',width = 1000, height = 1000,x_axis_label='date',y_axis_label='stock value')
+p = figure(x_axis_type = 'datetime',width = 1000, height = 800,x_axis_label='date',y_axis_label='stock value')
 p.title.text ='Candlestick Chart'
 p.grid.grid_line_alpha = 0.4
-#plot to have responsive height and width
-p.sizing_mode = "scale_both"
-hour_12 = 12*60*60*1000
 
 #segment(x-cordinates of the starting point, y-coordinates of the starting point,x-cordinates of the ending point, y-coordinates of the ending point)
 p.segment(df.index,df.High,df.index,df.Low,color = 'black') 
